@@ -1,0 +1,49 @@
+# Graph Neural Network training configuration
+
+# Random seed for reproducibility
+seed: 42
+
+# Logging level
+log_level: INFO
+
+# Data configuration
+data:
+  use_synthetic: true
+  n_samples: 1000
+  fingerprint_type: graph  # Use graph representation
+  test_size: 0.2
+  val_size: 0.1
+
+# Model configuration
+model:
+  type: graph
+  params:
+    node_features: 6
+    edge_features: 3
+    hidden_dim: 64
+    num_layers: 3
+    dropout: 0.2
+    conv_type: gcn  # gcn, gat
+
+# Training configuration
+training:
+  num_epochs: 100
+  batch_size: 16  # Smaller batch size for graphs
+  num_workers: 4
+  loss_function: mse
+  patience: 15
+  min_delta: 1e-4
+
+# Optimizer configuration
+optimizer:
+  optimizer_name: adam
+  lr: 0.001
+  weight_decay: 0.0001
+
+# Scheduler configuration
+scheduler:
+  scheduler_name: plateau
+  mode: min
+  factor: 0.5
+  patience: 5
+  verbose: true

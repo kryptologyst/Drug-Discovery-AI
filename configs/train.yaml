@@ -1,0 +1,48 @@
+# Training configuration for drug discovery model
+
+# Random seed for reproducibility
+seed: 42
+
+# Logging level
+log_level: INFO
+
+# Data configuration
+data:
+  use_synthetic: true
+  n_samples: 1000
+  fingerprint_type: morgan  # morgan, maccs, descriptors
+  radius: 2
+  n_bits: 1024
+  test_size: 0.2
+  val_size: 0.1
+
+# Model configuration
+model:
+  type: fingerprint  # fingerprint, graph, ensemble
+  params:
+    hidden_dims: [512, 256, 128]
+    dropout: 0.2
+    activation: relu
+
+# Training configuration
+training:
+  num_epochs: 100
+  batch_size: 32
+  num_workers: 4
+  loss_function: mse  # mse, mae, huber, focal
+  patience: 15
+  min_delta: 1e-4
+
+# Optimizer configuration
+optimizer:
+  optimizer_name: adam
+  lr: 0.001
+  weight_decay: 0.0001
+
+# Scheduler configuration
+scheduler:
+  scheduler_name: plateau
+  mode: min
+  factor: 0.5
+  patience: 5
+  verbose: true

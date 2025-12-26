@@ -1,0 +1,31 @@
+# Evaluation configuration for drug discovery model
+
+# Random seed for reproducibility
+seed: 42
+
+# Logging level
+log_level: INFO
+
+# Data configuration (should match training config)
+data:
+  use_synthetic: true
+  n_samples: 1000
+  fingerprint_type: morgan
+  radius: 2
+  n_bits: 1024
+  test_size: 0.2
+  val_size: 0.1
+
+# Model configuration (should match training config)
+model:
+  type: fingerprint
+  params:
+    hidden_dims: [512, 256, 128]
+    dropout: 0.2
+    activation: relu
+  checkpoint_path: ""  # Will be set by command line argument
+
+# Training configuration (for data loading)
+training:
+  batch_size: 32
+  num_workers: 4
